@@ -7,7 +7,7 @@ export default [
         jobtype:'Full Time',
         location:'InOffice',
         experience:'Mid Level',
-        skills:["swiftUi","UiKit", "Core Data"],
+        skills:["swiftUi","UiKit", "CoreData"],
         joblink:"https://www.apple.com/careers/in/"
     },
     {
