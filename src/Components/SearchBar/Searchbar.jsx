@@ -20,9 +20,9 @@ const Searchbar = () => {
         </select> 
         <select className="w-64 py-3 pl-4 bg-zinc-300 font-semibold rounded-md">
             <option value="" selected disabled hidden>Location</option>
-            <option value="ios Developer">In-Office</option>
-            <option value="Android Develope">Remote</option>
-            <option value="React Developer">Hybrid</option>
+            <option value="In-Office">In-Office</option>
+            <option value="Remote">Remote</option>
+            <option value="Hybrid">Hybrid</option>
         </select> 
         <select className="w-64 py-3 pl-4 bg-zinc-300 font-semibold rounded-md">
             <option value="" selected disabled hidden>Experience</option>

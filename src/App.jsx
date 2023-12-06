@@ -2,6 +2,8 @@ import Navbar from '../src/Components/Navbar/Navbar'
 import Header from '../src/Components/Header/Header'
 import Search from '../src/Components/SearchBar/Searchbar'
 import Jobcard from '../src/Components/JobCard/Jobcard'
+import Jobsdata from './Jobstore'
+
 function App() {
   return (
     <div className=''>
@@ -9,7 +11,9 @@ function App() {
       <Navbar/>
       <Header/>
       <Search/>
-      <Jobcard/>
+      {Jobsdata.map((job)=>(
+      <Jobcard key={job.id}{...job} />
+      ))}
     </div>
   )
 }
