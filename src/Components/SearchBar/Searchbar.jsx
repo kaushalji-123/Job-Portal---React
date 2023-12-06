@@ -31,7 +31,7 @@ const Searchbar = () => {
             <option value="Mid-Level">Mid-Level</option>
             <option value="Senior-Level">Senior-Level</option>
         </select> 
-        <button className="w-64 bg-blue-600 text-white font-bold py-3 rounded-md hover:to-blue-300">Search</button>
+        <button className="w-64 bg-blue-600 text-white font-bold py-3 rounded-md hover:to-blue-900 hover:translate-y-1 hover:scale-95">Search</button>
     </div>
   )
 }
