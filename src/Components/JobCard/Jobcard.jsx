@@ -11,7 +11,7 @@ const Jobcard = (props) => {
                 <p>{props.jobtype} &#x2022; {props.experience} &#x2022; {props.location}</p>
                 <div className="flex items-center gap-2">
                     {props.skills.map((skill)=>(
-                        <p key={skill} className="text-gray-600 py-0  rounded-md border border-black p-2"> {skill}</p>
+                    <p key={skill} className="text-gray-600 py-0  rounded-md border border-black p-2"> {skill}</p>
                     ))}
                 </div>
             </div>

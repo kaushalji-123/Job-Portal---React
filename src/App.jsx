@@ -32,16 +32,14 @@ function App() {
   }
   
 
-  const fetchJobsCustom = async(jobCritaria) =>{ 
+  const fetchJobsCustom = async(jobCritaria ) =>{ 
 
     // tempJob Array for pushing here the Firebase Data in Array Form
 
     const tempJobs = []
-    const JobsRef = query(collection(db,"Jobs"));
-
+    const  JobsRef = query(collection(db,"Jobs"));
     // orderBy used for arrange the data in Desending Order using 'PostedOn' Date 
-
-    const q = query(JobsRef,  where("type","==","jobCritaria.type"),  where("title","==","jobCritaria.title"),  where("location","==","jobCritaria.location"),  where("experience","==","jobCritaria.experience"), orderBy("postedOn" ,"desc"));
+    const q = query(JobsRef,  where("jobtype","==",jobCritaria.jobtype),  where("title","==",jobCritaria.title),   where("experience","==",jobCritaria.experience), where("location","==",jobCritaria.location), orderBy("postedOn" ,"desc"));
     const req = await getDocs(q);
     req.forEach((job)=>{
       tempJobs.push(
