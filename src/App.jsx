@@ -39,17 +39,45 @@ function App() {
     const tempJobs = []
     const  JobsRef = query(collection(db,"Jobs"));
     // orderBy used for arrange the data in Desending Order using 'PostedOn' Date 
-    const q = query(JobsRef,  where("jobtype","==",jobCritaria.jobtype),  where("title","==",jobCritaria.title),   where("experience","==",jobCritaria.experience), where("location","==",jobCritaria.location), orderBy("postedOn" ,"desc"));
-    const req = await getDocs(q);
-    req.forEach((job)=>{
-      tempJobs.push(
-        {...job.data(),
-        id: job.id,
-        postedOn:job.data().postedOn.toDate()
+  //   const q = query(JobsRef,where("experience","==",jobCritaria.experience), orderBy("postedOn" ,"desc"));
+  //   const req = await getDocs(q);
+  //   req.forEach((job)=>{
+  //     tempJobs.push(
+  //       {...job.data(),
+  //       id: job.id,
+  //       postedOn:job.data().postedOn.toDate()
+  //     });
+  //   });
+  //   setJobs(tempJobs);
+  // }
+  
+    // Constructing the query with multiple 'where' conditions and 'orderBy'
+    const q = query(
+      JobsRef,
+      where("location", "==", jobCritaria.location),
+      where("title", "==", jobCritaria.title),
+      where("jobtype", "==", jobCritaria.jobtype),
+      where("experience", "==", jobCritaria.experience),
+      orderBy("postedOn", "desc")
+    );
+  
+    try {
+      const querySnapshot = await getDocs(q);
+  
+      querySnapshot.forEach((job) => {
+        tempJobs.push({
+          ...job.data(),
+          id: job.id,
+          postedOn: job.data().postedOn.toDate(),
+        });
       });
-    });
-    setJobs(tempJobs);
-  }
+  
+      setJobs(tempJobs);
+    } catch (error) {
+      // Handle any errors here
+      console.error("Error fetching jobs:", error);
+    }
+  };  
 
   useEffect(() => {
     fetchJobs()
