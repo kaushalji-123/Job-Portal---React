@@ -9,17 +9,12 @@ function App() {
 
   const [jobs, setJobs] = useState([]);
 // Fetching the data from Firebase  
-
   const fetchJobs = async() =>{
-
     // tempJob Array for pushing here the Firebase Data in Array Form
-
     const tempJobs = []
-    const JobsRef = query(collection(db,"Jobs"));
-
+    const jobsRef = query(collection(db,"Jobs"));
     // orderBy used for arrange the data in Desending Order using 'PostedOn' Date 
-
-    const q = query(JobsRef, orderBy("postedOn" ,"desc"));
+    const q = query(jobsRef, orderBy("postedOn" ,"desc"));
     const req = await getDocs(q);
     req.forEach((job)=>{
       tempJobs.push(
@@ -31,54 +26,20 @@ function App() {
     setJobs(tempJobs);
   }
   
-
-  const fetchJobsCustom = async(jobCritaria ) =>{ 
-
-    // tempJob Array for pushing here the Firebase Data in Array Form
-
+  const fetchJobsCustom = async(jobCriteria) =>{
     const tempJobs = []
-    const  JobsRef = query(collection(db,"Jobs"));
-    // orderBy used for arrange the data in Desending Order using 'PostedOn' Date 
-  //   const q = query(JobsRef,where("experience","==",jobCritaria.experience), orderBy("postedOn" ,"desc"));
-  //   const req = await getDocs(q);
-  //   req.forEach((job)=>{
-  //     tempJobs.push(
-  //       {...job.data(),
-  //       id: job.id,
-  //       postedOn:job.data().postedOn.toDate()
-  //     });
-  //   });
-  //   setJobs(tempJobs);
-  // }
-  
-    // Constructing the query with multiple 'where' conditions and 'orderBy'
-    const q = query(
-      JobsRef,
-      where("location", "==", jobCritaria.location),
-      where("title", "==", jobCritaria.title),
-      where("jobtype", "==", jobCritaria.jobtype),
-      where("experience", "==", jobCritaria.experience),
-      orderBy("postedOn", "desc")
-    );
-  
-    try {
-      const querySnapshot = await getDocs(q);
-  
-      querySnapshot.forEach((job) => {
-        tempJobs.push({
-          ...job.data(),
-          id: job.id,
-          postedOn: job.data().postedOn.toDate(),
-        });
+    const jobsRef = query(collection(db,"Jobs"));
+    const q = query(jobsRef,where("jobtype", "==" ,jobCriteria.jobtype),where("title", "==" ,jobCriteria.title) ,where("experience", "==" ,jobCriteria.experience) ,where("location", "==" ,jobCriteria.location),  orderBy("postedOn" ,"desc"));
+    const req = await getDocs(q);
+    req.forEach((job)=>{
+      tempJobs.push(
+        {...job.data(),
+        id: job.id,
+        postedOn:job.data().postedOn.toDate()
       });
-  
-      setJobs(tempJobs);
-    } catch (error) {
-      // Handle any errors here
-      console.error("Error fetching jobs:", error);
-    }
-  };  
-
+    });
+    setJobs(tempJobs);
+  }  
   useEffect(() => {
     fetchJobs()
   },[])
@@ -98,3 +59,58 @@ function App() {
 }
 
 export default App
+
+
+
+
+
+
+  //   // orderBy used for arrange the data in Desending Order using 'PostedOn' Date 
+  //   // const q = query(JobsRef.where("experience","==",jobCritaria.experience), orderBy("postedOn" ,"desc"));
+  //       ,orderBy("postedOn" , "desc")
+  //       .where("location", "==", jobCritaria.location)
+  //       .where("experience","==",jobCritaria.experience)
+  //       .where("jobtype","==",jobCritaria.jobtype)
+  //       .where("title","==",jobCritaria.title))
+  //       const req = await getDocs(q);
+  //       req.forEach((job)=>{
+  //         tempJobs.push(
+  //           {...job.data(),
+  //           id: job.id,
+  //           postedOn:job.data().postedOn.toDate()
+  //         });
+  //       });
+  //       setJobs(tempJobs);
+  //     }
+
+
+
+
+
+    // tempJob Array for pushing here the Firebase Data in Array Form
+
+//     const req = await firestore
+//         .collection("Jobs")
+//         .orderBy("postedOn" , "desc")
+//         .where("location", "==", jobCritaria.location)
+//         .where("experience","==",jobCritaria.experience)
+//         .where("jobtype","==",jobCritaria.jobtype)
+//         .where("title","==",jobCritaria.title)
+//         .get();
+//       const tempJobs = req.docs.map((job)=>({
+//         ...job.data(),
+//         id: job.id,
+//         postedOn:job.data().postedOn.toDate(),
+//       }));
+// setJobs(tempJobs);
+//     };
+
+
+
+    // const tempJobs = []
+    // const  JobsRef = query(collection(db,"Jobs"));
+    // orderBy used for arrange the data in Desending Order using 'PostedOn' Date 
+    
+    
+    
+  

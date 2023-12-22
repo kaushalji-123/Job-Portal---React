@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const Searchbar = (props) => {
-    const [jobCritaria, setJobCritaria] = useState({
+    const [jobCriteria, setJobCriteria] = useState({
         title: "",
         location: "",
         experience: "",
@@ -9,15 +9,15 @@ const Searchbar = (props) => {
     });
 
     const handleChange = (e) => {
-        setJobCritaria((prevState) => ({
+        setJobCriteria((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value,
         }));
     };
-
+    console.log(jobCriteria);
     const search = async () => {
         try {
-            await props.fetchJobsCustom(jobCritaria);
+            await props.fetchJobsCustom(jobCriteria);
         } catch (error) {
             console.error('Error fetching custom jobs:', error);
         }
@@ -25,28 +25,27 @@ const Searchbar = (props) => {
 
     return (
         <div className="flex flex-col sm:flex-row sm:justify-center sm:items-center gap-4 sm:my-10 sm:px-10">
-            <select onChange={handleChange} name="title" value={jobCritaria.title} className="w-full sm:w-64 py-3 pl-4 bg-zinc-300 font-semibold rounded-md">
-                <option value="" disabled hidden>Job Role</option>
+            <select onChange={handleChange} name="title" value={jobCriteria.title} className="w-full sm:w-64 py-3 pl-4 bg-zinc-300 font-semibold rounded-md">
+                <option value="" disabled  hidden>Job Role</option>
                 <option value="ios Developer">iOS Developer</option>
                 <option value="Android Developer">Android Developer</option>
                 <option value="React Developer">React Developer</option>
             </select>
-            <select onChange={handleChange} name="jobtype" value={jobCritaria.jobtype} className="w-full sm:w-64 py-3 pl-4 bg-zinc-300 font-semibold rounded-md">
-                <option value="" disabled hidden>Job Type</option>
+            <select onChange={handleChange} name="jobtype" value={jobCriteria.jobtype} className="w-full sm:w-64 py-3 pl-4 bg-zinc-300 font-semibold rounded-md">
+                <option value="" disabled  hidden>jobtype</option>
                 <option value="Full Time">Full Time</option>
                 <option value="Part Time">Part Time</option>
                 <option value="Internship">Internship</option>
                 <option value="Contract">Contract</option>
             </select>
-            <select onChange={handleChange} name="location" value={jobCritaria.location} className="w-full sm:w-64 py-3 pl-4 bg-zinc-300 font-semibold rounded-md">
-                <option value="" disabled hidden>Location</option>
-                <option value="InOffice">In-Office</option>
+            <select onChange={handleChange} name="location" value={jobCriteria.location} className="w-full sm:w-64 py-3 pl-4 bg-zinc-300 font-semibold rounded-md">
+                <option value="" disabled  hidden>location</option>
+                <option value="InOffice">InOffice</option>
                 <option value="Remote">Remote</option>
                 <option value="Hybrid">Hybrid</option>
             </select>
-            <select onChange={handleChange} name="experience" value={jobCritaria.experience} className="w-full sm:w-64 py-3 pl-4 bg-zinc-300 font-semibold rounded-md">
-                <option value="" disabled hidden>Experience</option>
-                <option value="Fresher">Fresher</option>
+            <select onChange={handleChange} name="experience" value={jobCriteria.experience} className="w-full sm:w-64 py-3 pl-4 bg-zinc-300 font-semibold rounded-md">
+                <option value="" disabled  hidden>experience</option>
                 <option value="Entry Level">Entry Level</option>
                 <option value="Mid Level">Mid Level</option>
                 <option value="Senior Level">Senior Level</option>
