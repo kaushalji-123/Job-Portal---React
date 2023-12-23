@@ -29,10 +29,23 @@ function App() {
   const fetchJobsCustom = async(jobCriteria) =>{
     const tempJobs = []
     const jobsRef = query(collection(db,"Jobs"));
-    const q = query(jobsRef,where("jobtype", "==" ,jobCriteria.jobtype),where("title", "==" ,jobCriteria.title) ,where("experience", "==" ,jobCriteria.experience) ,where("location", "==" ,jobCriteria.location),  orderBy("postedOn" ,"desc"));
-    const req = await getDocs(q);
+    // const q = query(jobsRef,where("jobtype", "==" ,jobCriteria.jobtype),where("title", "==" ,jobCriteria.title),where("location", "==" ,jobCriteria.location),where("experience", "==" ,jobCriteria.experience), orderBy("postedOn" ,"desc"));
+    const q = query(
+      jobsRef,
+      // where("jobtype", "==", jobCriteria.jobtype),
+      where("title", "==", jobCriteria.title),
+      // where("location", "==", jobCriteria.location),
+      // where("experience", "==", jobCriteria.experience),
+      orderBy("postedOn", "desc")
+    );
+    const r = query(
+      jobsRef,
+      where("jobtype", "==", jobCriteria.jobtype),
+      orderBy("postedOn", "desc")
+    );
+    const req = await getDocs(q,r);
     req.forEach((job)=>{
-      tempJobs.push(
+      tempJobs.push( 
         {...job.data(),
         id: job.id,
         postedOn:job.data().postedOn.toDate()
